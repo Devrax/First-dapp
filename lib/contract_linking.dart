@@ -1,23 +1,29 @@
-import "package:flutter/material.dart";
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart';
+import 'package:dart_web3/dart_web3.dart';
+import 'package:web_socket_channel/io.dart';
 
 class ContractLinking extends ChangeNotifier {
-    final String _rpcUrl = "http://10.0.2.2:7545";
-    final String _wsUrl = "ws://127.0.2.2:7545";
-    final String _privateKey = "ad78250aeccf3310fcacc2eca673918b8d722587701ebbe1712bfc0c16f9b580";
+    final String _rpcUrl = "http://192.168.1.26:7545";
+    final String _wsUrl = "ws://192.168.1.26:7545";
+    final String _privateKey = "427786dda73dad3849636cf31fcaca5083a69a23428f4146a86e6f00544497cb";
 
-    Web3Client _client;
+    late Web3Client _client;
     bool isLoading = true;
 
-    String _abiCode;
-    EthereumAddress _contractAddress;
+    late String _abiCode;
+    late EthereumAddress _contractAddress;
 
-    Credentials _credentials;
+    late Credentials _credentials;
 
-    DeployedContract _contract;
-    ContractFunction _yourName;
-    ContractFunction _setName;
+    late DeployedContract _contract;
+    late ContractFunction _yourName;
+    late ContractFunction _setName;
 
-    String deployedName;
+    String? deployedName;
 
     ContractLinking() {
         initialSetup();
@@ -52,14 +58,14 @@ class ContractLinking extends ChangeNotifier {
         getName();
     }
 
-    getName() async {
-        var currentName = await _client.call(contratc: _contract, function: _yourName, params: []);
-        deployedName = currentName.toString();
+    Future<void> getName() async {
+        var currentName = await _client.call(contract: _contract, function: _yourName, params: []);
+        deployedName = currentName[0];
         isLoading = false;
         notifyListeners();
     }
 
-    setName(String nameToSet) async {
+    Future<void> setName(String nameToSet) async {
         isLoading = true;
         notifyListeners();
         await _client.sendTransaction(
