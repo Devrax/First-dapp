@@ -1,16 +1,15 @@
 # first_dapp
 
-A new Flutter project.
+## How to run
 
-## Getting Started
+First install truffle `npm install -g truffle`, once installed, download and installed [ganache](https://trufflesuite.com/ganache/)(MacOS my case), run **ganache** and select the "Quickstart" button.
 
-This project is a starting point for a Flutter application.
+![lol](./assets/Ganache-home.png 'Ganache Home')
 
-A few resources to get you started if this is your first Flutter project:
+![lol](./assets/Ganache-accounts.png 'Ganache accounts')
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+After that, go to the folder directory **./lib/contract_linking.dart** and replace the private key and set the *_rpcUrl* and *wsUrl* with your own, and later go to the root directory to find the **truffle-config.js** and set the *host* property with same value as the *_wsUrl* and *_rpcUrl*.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Runs `truffle migrate` and later `flutter run`, just wait until compiling is done and compare with the preview below
+
+![lol](./assets/preview.gif 'App working')
