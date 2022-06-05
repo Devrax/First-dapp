@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class ContractLinking extends ChangeNotifier {
-    final String _rpcUrl = "http://10.2.2.0:7545";
-    final String _wsUrl = "ws://127.2.2.0:7545";
+    final String _rpcUrl = "http://10.0.2.2:7545";
+    final String _wsUrl = "ws://127.0.2.2:7545";
     final String _privateKey = "ad78250aeccf3310fcacc2eca673918b8d722587701ebbe1712bfc0c16f9b580";
 
     Web3Client _client;
